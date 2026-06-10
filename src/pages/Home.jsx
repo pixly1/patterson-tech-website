@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import GalaxyHero from '../components/GalaxyHero'
@@ -21,6 +22,28 @@ const wipeIn = {
 }
 
 export default function Home() {
+  const [auditFields, setAuditFields] = useState({ name: '', email: '', phone: '', businessType: '', notes: '' })
+  const [auditState, setAuditState] = useState('idle')
+
+  function handleAuditChange(e) {
+    setAuditFields((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  async function handleAuditSubmit(e) {
+    e.preventDefault()
+    setAuditState('submitting')
+    try {
+      const res = await fetch('https://formspree.io/f/xykaprnl', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(auditFields),
+      })
+      setAuditState(res.ok ? 'success' : 'error')
+    } catch {
+      setAuditState('error')
+    }
+  }
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -171,39 +194,101 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div
-              className="glass p-8 md:p-10 max-w-xl mx-auto"
-              style={{ borderColor: 'rgba(0,255,163,0.1)', borderWidth: 1, borderStyle: 'solid' }}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                {['Your Name', 'Email Address', 'Phone', 'Business Type'].map((placeholder, i) => (
+            {auditState === 'success' ? (
+              <div
+                className="glass p-12 max-w-xl mx-auto text-center flex flex-col items-center gap-5"
+                style={{ borderColor: 'rgba(0,255,163,0.2)', borderWidth: 1, borderStyle: 'solid' }}
+              >
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center"
+                  style={{ background: 'rgba(0,255,163,0.1)', border: `1.5px solid rgba(0,255,163,0.4)` }}
+                >
+                  <span style={{ color: SF, fontSize: 22 }}>✓</span>
+                </div>
+                <h3 className="font-barlow-condensed font-700 text-bone text-2xl tracking-[0.04em]">You're booked.</h3>
+                <p className="font-barlow text-muted text-base max-w-xs leading-relaxed">
+                  We'll reach out within 24 hours to confirm your audit time.
+                </p>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleAuditSubmit}
+                className="glass p-8 md:p-10 max-w-xl mx-auto flex flex-col gap-4"
+                style={{ borderColor: 'rgba(0,255,163,0.1)', borderWidth: 1, borderStyle: 'solid' }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
-                    key={i}
                     type="text"
-                    placeholder={placeholder}
+                    name="name"
+                    value={auditFields.name}
+                    onChange={handleAuditChange}
+                    placeholder="Your Name"
+                    required
                     className="bg-white/5 border border-white/10 px-4 py-3 text-base font-barlow text-bone placeholder:text-muted/50 focus:outline-none transition-colors"
                     onFocus={(e) => { e.target.style.borderColor = `${SF}40` }}
-                    onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.1)' }}
+                    onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)' }}
                   />
-                ))}
-              </div>
-              <textarea
-                placeholder="What's going on? (optional)"
-                rows={3}
-                className="w-full bg-white/5 border border-white/10 px-4 py-3 text-base font-barlow text-bone placeholder:text-muted/50 focus:outline-none transition-colors mb-5 resize-none"
-                onFocus={(e) => { e.target.style.borderColor = `${SF}40` }}
-                onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.1)' }}
-              />
-              <button
-                className="w-full py-4 font-barlow-condensed font-700 text-base tracking-[0.18em] uppercase transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
-                style={{ background: SF, color: '#050508' }}
-              >
-                Book a Free Audit →
-              </button>
-              <p className="text-center font-barlow text-sm text-muted/40 mt-4 tracking-wide">
-                Free · 15 minutes · You'll walk away with complete clarity.
-              </p>
-            </div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={auditFields.email}
+                    onChange={handleAuditChange}
+                    placeholder="Email Address"
+                    required
+                    className="bg-white/5 border border-white/10 px-4 py-3 text-base font-barlow text-bone placeholder:text-muted/50 focus:outline-none transition-colors"
+                    onFocus={(e) => { e.target.style.borderColor = `${SF}40` }}
+                    onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)' }}
+                  />
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={auditFields.phone}
+                    onChange={handleAuditChange}
+                    placeholder="Phone"
+                    required
+                    className="bg-white/5 border border-white/10 px-4 py-3 text-base font-barlow text-bone placeholder:text-muted/50 focus:outline-none transition-colors"
+                    onFocus={(e) => { e.target.style.borderColor = `${SF}40` }}
+                    onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)' }}
+                  />
+                  <input
+                    type="text"
+                    name="businessType"
+                    value={auditFields.businessType}
+                    onChange={handleAuditChange}
+                    placeholder="Business Type"
+                    className="bg-white/5 border border-white/10 px-4 py-3 text-base font-barlow text-bone placeholder:text-muted/50 focus:outline-none transition-colors"
+                    onFocus={(e) => { e.target.style.borderColor = `${SF}40` }}
+                    onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)' }}
+                  />
+                </div>
+                <textarea
+                  name="notes"
+                  value={auditFields.notes}
+                  onChange={handleAuditChange}
+                  placeholder="What's going on? (optional)"
+                  rows={3}
+                  className="w-full bg-white/5 border border-white/10 px-4 py-3 text-base font-barlow text-bone placeholder:text-muted/50 focus:outline-none transition-colors resize-none"
+                  onFocus={(e) => { e.target.style.borderColor = `${SF}40` }}
+                  onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)' }}
+                />
+                <button
+                  type="submit"
+                  disabled={auditState === 'submitting'}
+                  className="w-full py-4 font-barlow-condensed font-700 text-base tracking-[0.18em] uppercase transition-all duration-200 hover:opacity-90 active:scale-[0.99] disabled:opacity-50"
+                  style={{ background: SF, color: '#050508' }}
+                >
+                  {auditState === 'submitting' ? 'Sending...' : 'Book a Free Audit →'}
+                </button>
+                {auditState === 'error' && (
+                  <p className="text-center font-barlow text-sm text-red-400/80">
+                    Something went wrong — try again or reach out directly.
+                  </p>
+                )}
+                <p className="text-center font-barlow text-sm text-muted/40 tracking-wide">
+                  Free · 15 minutes · You'll walk away with complete clarity.
+                </p>
+              </form>
+            )}
           </motion.div>
         </div>
       </section>

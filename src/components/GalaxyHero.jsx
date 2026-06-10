@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useMotionValue, useVelocity, useSpring } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -166,6 +166,18 @@ function makeAutoPaths(w, h) {
 // ─── Component ────────────────────────────────────────────────────────────
 
 export default function GalaxyHero() {
+  const [spacerHeight, setSpacerHeight] = useState(
+    () => window.innerWidth < 768 ? '600vh' : '1600vh'
+  )
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSpacerHeight(window.innerWidth < 768 ? '600vh' : '1600vh')
+    }
+    window.addEventListener('resize', handleResize, { passive: true })
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const spacerRef   = useRef(null)
   const canvasRef   = useRef(null)
   const progressRef = useRef(0)
@@ -513,7 +525,7 @@ export default function GalaxyHero() {
   }, [])
 
   return (
-    <div ref={spacerRef} style={{ position: 'relative', height: '1600vh' }}>
+    <div ref={spacerRef} style={{ position: 'relative', height: spacerHeight }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
         <canvas
           ref={canvasRef}

@@ -13,6 +13,9 @@ import Library from './pages/Library'
 import About from './pages/About'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
+import Websites from './pages/services/Websites'
+import SocialMedia from './pages/services/SocialMedia'
+import PaidAds from './pages/services/PaidAds'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -53,6 +56,9 @@ function AnimatedRoutes() {
         <Route path="/library" element={<Library />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/services/websites" element={<Websites />} />
+        <Route path="/services/social-media" element={<SocialMedia />} />
+        <Route path="/services/paid-ads" element={<PaidAds />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </AnimatePresence>
