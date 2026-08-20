@@ -3,49 +3,6 @@ import { Link } from 'react-router-dom'
 
 const SF = '#00FFA3'
 
-const SERVICES = [
-  {
-    num: '01',
-    title: 'Organic Social Media',
-    headline: 'Build Presence. Own Your Feed.',
-    desc: 'Consistent, on-brand content that builds trust and keeps your business top-of-mind — without paid spend. We handle strategy, copy, and posting so you can focus on the work.',
-    items: ['Content strategy & planning', 'Platform-specific copy & creative', 'Consistent posting schedule', 'Engagement & community growth'],
-    path: '/services/social-media',
-  },
-  {
-    num: '02',
-    title: 'Quality Website Development',
-    headline: 'Sites That Actually Win Clients.',
-    desc: 'Custom-designed, mobile-first websites built to turn visitors into callers. No templates. No filler. Every site is designed from scratch around your business.',
-    items: ['100% custom design — no templates', 'Mobile-first & fast-loading', 'Lead capture & form integration', 'Built for search visibility'],
-    path: '/services/websites',
-  },
-  {
-    num: '03',
-    title: 'Paid Ads & Lead Generation',
-    headline: 'Every Dollar Has a Path to a Job.',
-    desc: 'Meta and Google campaigns built around your ideal client. Full stack: audience, creative, landing page, lead form, and follow-up. No spend without a strategy.',
-    items: ['Campaign strategy & setup', 'Ad copy & creative direction', 'Dedicated landing pages', 'Lead tracking & weekly reporting'],
-    path: '/services/paid-ads',
-  },
-]
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
-  }),
-}
-
-const wipeIn = {
-  hidden: { opacity: 0, clipPath: 'inset(0 100% 0 0)' },
-  visible: {
-    opacity: 1, clipPath: 'inset(0 0% 0 0)',
-    transition: { duration: 0.95, ease: [0.22, 1, 0.36, 1] },
-  },
-}
-
 export default function Services() {
   return (
     <motion.main
@@ -57,101 +14,207 @@ export default function Services() {
     >
       <div className="max-w-6xl mx-auto">
 
-        {/* ─── HEADER ─────────────────────────────────────────────── */}
-        <motion.div initial="hidden" animate="visible" className="flex flex-col gap-4 mb-16">
-          <motion.span variants={fadeUp} custom={0} className="font-barlow-condensed font-600 text-xs tracking-[0.25em] uppercase text-muted">
-            Services
-          </motion.span>
-          <motion.h1
-            variants={wipeIn}
-            className="font-barlow-condensed font-800 text-bone leading-[0.93]"
-            style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}
+        {/* ─── HERO: THE SYSTEM ───────────────────────────────────── */}
+        <div className="max-w-4xl mx-auto mb-20 text-center">
+          <h1
+            className="font-barlow-condensed font-800 text-bone leading-[0.95] mb-5"
+            style={{ fontSize: 'clamp(2.6rem, 6vw, 4.8rem)' }}
           >
-            Three Ways We Help You<br />
-            <span style={{ color: SF }}>Win Online.</span>
-          </motion.h1>
-          <motion.p variants={fadeUp} custom={2} className="font-barlow text-muted text-lg leading-relaxed max-w-2xl">
-            No generic packages. No retainers for things that don't work. Each service is built around one goal — more qualified leads and booked jobs.
-          </motion.p>
-        </motion.div>
+            It All Runs On <span style={{ color: SF }}>One System.</span>
+          </h1>
+          <p className="font-barlow text-lg text-muted leading-relaxed max-w-2xl mx-auto mb-10">
+            We don't become another monthly marketing company. We build the system,
+            teach your team, and help you own it.
+          </p>
 
-        <div className="section-divider mb-16" />
+          {/* PTOS dashboard screenshot placeholder */}
+          <div
+            className="relative w-full max-w-3xl mx-auto"
+            style={{
+              aspectRatio: '16/9',
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(0,255,163,0.22)',
+              borderRadius: 16,
+              overflow: 'hidden',
+            }}
+          >
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+              <span
+                className="font-barlow-condensed font-800 uppercase tracking-[0.2em]"
+                style={{ color: SF, fontSize: 'clamp(1.4rem, 3vw, 2.2rem)' }}
+              >
+                PTOS Dashboard
+              </span>
+              <span className="font-barlow text-muted text-sm uppercase tracking-[0.2em]">
+                Screenshot coming soon
+              </span>
+            </div>
+          </div>
+        </div>
 
-        {/* ─── SERVICE CARDS ──────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-20">
-          {SERVICES.map((service, i) => (
-            <motion.div
-              key={service.num}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="group glass glass-hover flex flex-col gap-0 overflow-hidden"
-              style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+        {/* ─── AGENCY COMPARISON ──────────────────────────────────── */}
+        <div className="max-w-3xl mx-auto mb-20">
+          <h2
+            className="font-barlow-condensed font-800 text-bone leading-[0.95] text-center mb-10"
+            style={{ fontSize: 'clamp(1.9rem, 4vw, 3rem)' }}
+          >
+            Most agencies create dependence.<br />
+            <span style={{ color: SF }}>You deserve ownership.</span>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              className="p-8 flex flex-col gap-5"
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 14,
+              }}
             >
-              {/* card top bar accent */}
+              <span className="font-barlow-condensed font-800 text-2xl text-muted uppercase tracking-[0.1em]">
+                Typical Agency
+              </span>
+              <ul className="flex flex-col gap-3">
+                {[
+                  'Monthly retainers that never end — you pay forever',
+                  'Lose access the day you leave',
+                  'No understanding of how it works',
+                  'Everything outsourced',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 font-barlow text-base text-muted">
+                    <span className="mt-0.5" style={{ color: 'rgba(255,80,80,0.7)' }}>✕</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div
+              className="p-8 flex flex-col gap-5"
+              style={{
+                background: 'rgba(0,255,163,0.04)',
+                border: '1.5px solid rgba(0,255,163,0.35)',
+                borderRadius: 14,
+                boxShadow: '0 0 40px rgba(0,255,163,0.08)',
+              }}
+            >
+              <span className="font-barlow-condensed font-800 text-2xl text-bone uppercase tracking-[0.1em]">
+                Patterson Tech
+              </span>
+              <ul className="flex flex-col gap-3">
+                {[
+                  'Pay once — access the system forever',
+                  'Your business keeps growing',
+                  'Your team understands it',
+                  'You control everything',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 font-barlow text-base text-bone/90">
+                    <span className="mt-0.5" style={{ color: SF }}>✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── THE PROCESS ────────────────────────────────────────── */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <h2
+            className="font-barlow-condensed font-800 text-bone leading-[0.95] text-center mb-12"
+            style={{ fontSize: 'clamp(2rem, 4.5vw, 3.4rem)' }}
+          >
+            Here's exactly what happens.
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { n: '01', title: 'Discovery', text: "We dig into your business — where customers come from now, and what's holding growth back." },
+              { n: '02', title: 'Build', text: 'We build your system: website, lead capture, automations, content — every piece wired together.' },
+              { n: '03', title: 'Train', text: 'We teach someone you already trust to run it. Real training, real SOPs.' },
+              { n: '04', title: 'Support', text: 'We stay in your corner — but your business never depends on us to keep growing.' },
+            ].map((s) => (
               <div
-                className="h-px w-full transition-all duration-500"
-                style={{ background: `linear-gradient(90deg, transparent, rgba(0,255,163,0.0) 50%, transparent)` }}
-              />
-
-              <div className="flex flex-col gap-5 p-7 pb-6 flex-1">
-                {/* number */}
-                <span className="font-barlow-condensed font-700 text-sm tracking-[0.18em] text-muted/50">
-                  {service.num}
+                key={s.n}
+                className="glass p-7 flex flex-col gap-3"
+                style={{ borderColor: 'rgba(0,255,163,0.18)', borderRadius: 14 }}
+              >
+                <span className="font-barlow-condensed font-800" style={{ color: SF, fontSize: '2rem', lineHeight: 1 }}>
+                  {s.n}
                 </span>
-
-                {/* title + headline */}
-                <div className="flex flex-col gap-2">
-                  <h2 className="font-barlow-condensed font-800 text-bone leading-[0.95]" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2rem)' }}>
-                    {service.title}
-                  </h2>
-                  <p className="font-barlow-condensed font-600 text-sm tracking-[0.06em]" style={{ color: SF }}>
-                    {service.headline}
-                  </p>
-                </div>
-
-                {/* description */}
-                <p className="font-barlow text-sm text-muted leading-relaxed">
-                  {service.desc}
-                </p>
-
-                {/* features */}
-                <ul className="flex flex-col gap-2 flex-1">
-                  {service.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: 'rgba(0,255,163,0.5)' }} />
-                      <span className="font-barlow text-xs text-muted/75 leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="font-barlow-condensed font-800 text-bone text-2xl leading-tight">{s.title}</h3>
+                <p className="font-barlow text-sm text-muted leading-relaxed">{s.text}</p>
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* CTA */}
-              <div className="px-7 pb-7">
-                <Link
-                  to={service.path}
-                  className="group/link flex items-center justify-between w-full py-3.5 px-5 font-barlow-condensed font-700 text-xs tracking-[0.18em] uppercase transition-all duration-200"
-                  style={{
-                    background: 'rgba(0,255,163,0.07)',
-                    border: '1px solid rgba(0,255,163,0.18)',
-                    color: SF,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(0,255,163,0.14)'
-                    e.currentTarget.style.borderColor = 'rgba(0,255,163,0.35)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(0,255,163,0.07)'
-                    e.currentTarget.style.borderColor = 'rgba(0,255,163,0.18)'
-                  }}
-                >
-                  <span>Explore Service</span>
-                  <span className="transition-transform duration-200 group-hover/link:translate-x-1">→</span>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+        {/* ─── PRICING STATEMENT ──────────────────────────────────── */}
+        <div className="max-w-3xl mx-auto mb-20 text-center">
+          <div
+            className="p-10 md:p-12"
+            style={{
+              background: 'rgba(0,255,163,0.04)',
+              border: '1.5px solid rgba(0,255,163,0.3)',
+              borderRadius: 16,
+              boxShadow: '0 0 40px rgba(0,255,163,0.07)',
+            }}
+          >
+            <h2
+              className="font-barlow-condensed font-800 text-bone leading-[0.95] mb-4"
+              style={{ fontSize: 'clamp(1.9rem, 4vw, 3rem)' }}
+            >
+              One-time purchase.<br />
+              <span style={{ color: SF }}>One small, cheap subscription.</span>
+            </h2>
+            <p className="font-barlow text-base text-muted leading-relaxed max-w-lg mx-auto">
+              You buy the system once. A small maintenance subscription keeps your PTOS
+              running, updated, and supported. No retainers. No endless contracts.
+              That's it.
+            </p>
+          </div>
+
+          {/* Done-for-you option */}
+          <div
+            className="p-8 md:p-10 mt-8 text-center"
+            style={{
+              background: 'rgba(255,255,255,0.02)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              borderRadius: 16,
+            }}
+          >
+            <span
+              className="inline-block font-barlow-condensed font-700 text-xs tracking-[0.24em] uppercase px-3 py-1 mb-4"
+              style={{ background: 'rgba(0,255,163,0.12)', color: SF, borderRadius: 4 }}
+            >
+              Optional
+            </span>
+            <h3
+              className="font-barlow-condensed font-800 text-bone leading-[0.95] mb-4"
+              style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)' }}
+            >
+              Rather have us <span style={{ color: SF }}>run it for you?</span>
+            </h3>
+            <p className="font-barlow text-base text-muted leading-relaxed max-w-lg mx-auto mb-7">
+              Don't want to touch the dashboard? We've got you. You still get set up on
+              PTOS the exact same way — but our team runs it for you, month to month.
+              Your content, your leads, your follow-up: handled.
+            </p>
+            <Link
+              to="/"
+              onClick={() => setTimeout(() => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' }), 100)}
+              className="inline-block font-barlow-condensed font-700 text-sm tracking-[0.15em] uppercase px-10 py-4 transition-all duration-200 hover:opacity-90"
+              style={{ border: `2px solid ${SF}`, color: SF, borderRadius: 8 }}
+            >
+              Have Us Run It For You →
+            </Link>
+          </div>
+
+          {/* Ownership statement */}
+          <p
+            className="font-barlow-condensed font-800 text-bone leading-snug mt-14"
+            style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}
+          >
+            Every system we build is taught to someone you already trust.<br />
+            <span style={{ color: SF }}>And when we're done — it's yours. Everything.</span>
+          </p>
         </div>
 
         {/* ─── BOTTOM CTA ─────────────────────────────────────────── */}
@@ -163,7 +226,7 @@ export default function Services() {
           className="text-center flex flex-col items-center gap-4"
         >
           <p className="font-barlow text-muted text-base">
-            Not sure what you need? Start with the free audit.
+            Ready to see what this looks like for your business?
           </p>
           <Link
             to="/"
@@ -171,19 +234,13 @@ export default function Services() {
             className="inline-block font-barlow-condensed font-700 text-sm tracking-[0.15em] uppercase px-10 py-4 transition-all duration-200 hover:opacity-90"
             style={{ background: SF, color: '#050508' }}
           >
-            Book Your Free Audit →
+            Apply to Work With Us →
           </Link>
           <p className="font-barlow text-xs text-muted/40">
             Free · 15 minutes · No pitch. No obligation.
           </p>
         </motion.div>
       </div>
-
-      <footer className="border-t border-white/5 mt-24 pt-8">
-        <p className="font-barlow text-[10px] text-muted/25 tracking-wide text-center">
-          Built by Patterson Tech Web Services
-        </p>
-      </footer>
     </motion.main>
   )
 }

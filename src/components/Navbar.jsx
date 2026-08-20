@@ -6,8 +6,8 @@ import logo from '../assets/logo-mark.png'
 const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'Learn', path: '/library' },
-  { label: 'Services', path: '/services' },
-  { label: 'About', path: '/about' },
+  { label: 'Our System', path: '/our-system' },
+  { label: 'FREE Resources', path: '/free-resources' },
   { label: 'Contact', path: '/contact' },
 ]
 
@@ -50,14 +50,14 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo mark */}
         <Link to="/" className="flex items-center gap-3 group cursor-pointer">
           <img
             src={logo}
             alt="Patterson Tech"
-            className="h-[52px] w-[52px] object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-200"
-            style={{ filter: 'invert(1) brightness(2.5)', mixBlendMode: 'screen' }}
+            className="h-[72px] w-[72px] object-contain opacity-100 transition-opacity duration-200"
+            style={{ filter: 'invert(1) brightness(3)', mixBlendMode: 'screen', transform: 'scale(1.45)', transformOrigin: 'left center', marginRight: 28 }}
           />
           <span className="font-barlow-condensed font-700 text-base tracking-[0.18em] uppercase text-bone/70 group-hover:text-bone transition-colors duration-200">
             Patterson Tech
@@ -83,7 +83,7 @@ export default function Navbar() {
             onClick={handleBookAudit}
             className="btn-seafoam font-barlow text-sm tracking-[0.08em] uppercase px-5 py-2 border border-white/20 text-bone"
           >
-            Book Audit
+            Apply
           </button>
         </div>
 
@@ -97,6 +97,19 @@ export default function Navbar() {
           <span className={`block h-px w-6 bg-bone transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
           <span className={`block h-px w-6 bg-bone transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
+      </div>
+
+      {/* Availability bar — attached to bottom of nav, hides on scroll */}
+      <div
+        className="w-full flex items-center justify-center px-3 overflow-hidden transition-all duration-300"
+        style={{ background: '#E8112D', height: scrolled ? 0 : 26, opacity: scrolled ? 0 : 1 }}
+      >
+        <span
+          className="bg-white text-black font-barlow-condensed font-800 uppercase px-3 tracking-[0.08em] text-center whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ borderRadius: 3, fontSize: 'clamp(0.6rem, 1.3vw, 0.78rem)', maxWidth: '100%' }}
+        >
+          🔴 LIMITED AVAILABILITY — ONLY 3 HANDS-ON CLIENT SPOTS OPEN THIS MONTH
+        </span>
       </div>
 
       {/* Mobile menu */}
@@ -121,7 +134,7 @@ export default function Navbar() {
               onClick={handleBookAudit}
               className="btn-seafoam font-barlow text-sm tracking-[0.08em] uppercase px-5 py-3 border border-white/20 text-bone text-center mt-2 w-full"
             >
-              Book Free Audit
+              Apply
             </button>
           </div>
         </motion.div>

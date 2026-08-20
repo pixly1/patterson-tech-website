@@ -1,18 +1,16 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import Lenis from '@studio-freight/lenis'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Library from './pages/Library'
-import About from './pages/About'
+import FreeResources from './pages/FreeResources'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import Terms from './pages/Terms'
 import Websites from './pages/services/Websites'
 import SocialMedia from './pages/services/SocialMedia'
 import PaidAds from './pages/services/PaidAds'
@@ -25,28 +23,6 @@ function ScrollToTop() {
   return null
 }
 
-function LenisProvider() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: false,
-    })
-
-    // Sync Lenis with GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add((time) => lenis.raf(time * 1000))
-    gsap.ticker.lagSmoothing(0)
-
-    return () => {
-      lenis.destroy()
-      gsap.ticker.remove((time) => lenis.raf(time * 1000))
-    }
-  }, [])
-  return null
-}
-
 function AnimatedRoutes() {
   const location = useLocation()
   return (
@@ -54,12 +30,15 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/library" element={<Library />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/free-resources" element={<FreeResources />} />
+        <Route path="/our-system" element={<Services />} />
+        <Route path="/services" element={<Navigate to="/our-system" replace />} />
         <Route path="/services/websites" element={<Websites />} />
         <Route path="/services/social-media" element={<SocialMedia />} />
         <Route path="/services/paid-ads" element={<PaidAds />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </AnimatePresence>
   )
@@ -68,10 +47,10 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <LenisProvider />
       <ScrollToTop />
       <Navbar />
       <AnimatedRoutes />
+      <Footer />
     </BrowserRouter>
   )
 }

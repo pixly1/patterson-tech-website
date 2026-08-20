@@ -19,6 +19,9 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--void);
+  /* Prevent overscroll from exposing a different (e.g. navy) bar at the edges */
+  overscroll-behavior: none;
 }
 
 body {
@@ -28,6 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* Lenis smooth scroll */
@@ -100,6 +104,16 @@ html.lenis {
   color: #00FFA3;
   border-color: rgba(0,255,163,0.4);
   box-shadow: 0 0 18px rgba(0,255,163,0.15);
+}
+
+/* Flashing unmute box on the VSL */
+@keyframes flashBox {
+  0%, 100% { opacity: 1;    box-shadow: 0 0 12px rgba(0,255,163,0.35); }
+  50%      { opacity: 0.45; box-shadow: 0 0 32px rgba(0,255,163,0.65); }
+}
+
+.flash-box {
+  animation: flashBox 1.2s ease-in-out infinite;
 }
 
 /* Clip text reveal animation */

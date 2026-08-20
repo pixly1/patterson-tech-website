@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import BookCard from '../components/BookCard'
 import VideoCard from '../components/VideoCard'
+import AskPatterson from '../components/AskPatterson'
 
 const BOOK = {
   title: 'The Future of Business',
@@ -162,71 +163,10 @@ export default function Library() {
         </div>
       </section>
 
-      {/* ─── PRIMARY CTA ───────────────────────────────────── */}
-      <section className="px-6 md:px-16 lg:px-24 py-20 border-b border-white/5">
-        <div className="max-w-3xl mx-auto text-center flex flex-col items-center gap-6">
-          <motion.span
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-barlow-condensed font-600 text-xs tracking-[0.25em] uppercase text-seafoam/60"
-          >
-            Ready to Transform Your Business?
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-barlow-condensed font-800 text-bone leading-[0.95]"
-            style={{ fontSize: 'clamp(3rem, 5.5vw, 5rem)' }}
-          >
-            Stop Losing Leads. Start Building the System.
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-barlow text-muted text-lg leading-relaxed max-w-xl"
-          >
-            Book a free 30-minute audit. You'll walk away with a clear picture of exactly what's hurting your online presence and how to fix it.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Link
-              to="/#audit"
-              className="inline-block font-barlow-condensed font-700 text-sm tracking-[0.15em] uppercase px-10 py-4 bg-white text-void hover:bg-bone/90 transition-all duration-200"
-            >
-              Book a Free Audit →
-            </Link>
-          </motion.div>
-          <p className="font-barlow text-xs text-muted/40 tracking-wide">
-            Free · 30 minutes · No pitch. No slides. No obligation.
-          </p>
+      {/* ─── ASK PATTERSON TECH (short-form video search) ──── */}
+      <AskPatterson />
 
-          <div className="mt-4 flex flex-col items-center gap-3 pt-4 border-t border-white/5 w-full">
-            <p className="font-barlow text-sm text-muted/70 leading-relaxed text-center max-w-sm">
-              Not ready to commit yet? That's completely fine — start by learning the system first.
-            </p>
-            <button
-              onClick={() => {
-                document.getElementById('video-library')?.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="font-barlow-condensed font-600 text-sm tracking-[0.15em] uppercase text-muted hover:text-bone transition-colors border-b border-muted/30 hover:border-white/40 pb-0.5"
-            >
-              Explore the Free Library ↓
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── VIDEO LIBRARY ─────────────────────────────────── */}
+      {/* ─── VIDEO LIBRARY (long-form) ─────────────────────── */}
       <section id="video-library" className="px-6 md:px-16 lg:px-24 py-20">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -311,18 +251,6 @@ export default function Library() {
           )}
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/5 px-6 py-8 mt-8">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <Link to="/" className="font-barlow-condensed font-600 text-xs tracking-[0.2em] uppercase text-muted/60 hover:text-muted transition-colors">
-            ← Back to Home
-          </Link>
-          <p className="font-barlow text-[10px] text-muted/25 tracking-wide">
-            Built by Patterson Tech Web Services
-          </p>
-        </div>
-      </footer>
     </motion.main>
   )
 }

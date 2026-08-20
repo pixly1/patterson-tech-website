@@ -234,12 +234,6 @@ export default function SocialMedia() {
           <span>←</span> Back to Services
         </Link>
       </div>
-
-      <footer className="border-t border-white/5 mt-12 pt-8 px-6">
-        <p className="font-barlow text-[10px] text-muted/25 tracking-wide text-center">
-          Built by Patterson Tech Web Services
-        </p>
-      </footer>
     </motion.main>
   )
 }
